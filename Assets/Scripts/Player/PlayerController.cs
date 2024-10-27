@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
         }
         private set {
             _isMoving = value;
-            this.animator.SetBool("isMoving", value);
+            this.animator.SetBool(AnimationStrings.isMoving, value);
         }
     }
     public Boolean IsRunning {
@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
         }
         private set {
             _isRunning = value;
-            this.animator.SetBool("isRunning", value);
+            this.animator.SetBool(AnimationStrings.isRunning, value);
         }
     }
     private float CurrentMoveSpeed {
