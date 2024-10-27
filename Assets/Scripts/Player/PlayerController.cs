@@ -1,10 +1,14 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] float walkSpeed = 5f;
     [SerializeField] float runSpeed = 8f;
+    [SerializeField] float airSpeed = 3f;
+    [SerializeField] float jumpImpulse = 10f;
+    TouchDirection touchDirection;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
     private Vector2 moveInput;
@@ -31,53 +35,63 @@ public class PlayerController : MonoBehaviour {
     }
     private float CurrentMoveSpeed {
         get {
-            if (this.IsMoving) {
-                return this.IsRunning ? runSpeed : walkSpeed;
-            }
+            if (this.IsMoving && !this.touchDirection.IsOnWall)
+                if (this.touchDirection.IsGrounded)
+                    return this.IsRunning ? this.runSpeed : this.walkSpeed;
+                else
+                    return this.airSpeed;
+
             return 0;
         }
     }
 
     private Boolean IsFacingRight {
         get {
-            return _isFacingRight;
+            return this._isFacingRight;
         }
         set {
-            if (_isFacingRight != value)
+            if (this._isFacingRight != value)
                 gameObject.transform.localScale *= new Vector2(-1, 1);
 
-            _isFacingRight = value;
+            this._isFacingRight = value;
         }
     }
 
     private void Awake() {
         this.rigidBody2D = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
+        this.touchDirection = GetComponent<TouchDirection>();
     }
 
     private void FixedUpdate() {
         this.rigidBody2D.velocity = new Vector2(this.moveInput.x * this.CurrentMoveSpeed, this.rigidBody2D.velocity.y);
+        this.animator.SetFloat(AnimationStrings.yVelocity, this.rigidBody2D.velocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext ctx) {
         this.moveInput = ctx.ReadValue<Vector2>();
-        IsMoving = this.moveInput != Vector2.zero;
+        this.IsMoving = this.moveInput != Vector2.zero;
         SetFacingDirection(moveInput);
     }
 
     private void SetFacingDirection(Vector2 moveInput) {
         if (moveInput.x > 0 && !IsFacingRight)
-            IsFacingRight = true;
+            this.IsFacingRight = true;
         else if (moveInput.x < 0 && IsFacingRight)
-            IsFacingRight = false;
+            this.IsFacingRight = false;
     }
 
     public void OnRun(InputAction.CallbackContext ctx) {
-        if (ctx.started) {
-            IsRunning = true;
-        }
-        else if (ctx.canceled) {
-            IsRunning = false;
+        if (ctx.started)
+            this.IsRunning = true;
+        else if (ctx.canceled)
+            this.IsRunning = false;
+    }
+
+    public void OnJump(InputAction.CallbackContext ctx) {
+        if (ctx.started && this.touchDirection.IsGrounded) {
+            this.animator.SetTrigger(AnimationStrings.jump);
+            this.rigidBody2D.velocity = new Vector2(this.rigidBody2D.velocity.x, this.jumpImpulse);
         }
     }
 }
