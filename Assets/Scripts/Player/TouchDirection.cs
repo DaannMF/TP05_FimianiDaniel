@@ -4,12 +4,12 @@ using UnityEngine;
 public class TouchDirection : MonoBehaviour {
     Animator animator;
     private ContactFilter2D castFilter;
-    private float groundDistance = 0.05f;
-    private float wallDistance = 0.2f;
-    private float ceilingDistance = 0.05f;
-    private RaycastHit2D[] groundHits = new RaycastHit2D[5];
-    private RaycastHit2D[] wallHits = new RaycastHit2D[5];
-    private RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
+    private readonly float groundDistance = 0.05f;
+    private readonly float wallDistance = 0.2f;
+    private readonly float ceilingDistance = 0.05f;
+    private readonly RaycastHit2D[] groundHits = new RaycastHit2D[5];
+    private readonly RaycastHit2D[] wallHits = new RaycastHit2D[5];
+    private readonly RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
     private CapsuleCollider2D touchingCollider2D;
     private Boolean _isGrounded;
     private Boolean _isOnWall;

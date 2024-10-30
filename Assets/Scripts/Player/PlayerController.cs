@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,11 +34,12 @@ public class PlayerController : MonoBehaviour {
     }
     private float CurrentMoveSpeed {
         get {
-            if (this.IsMoving && !this.touchDirection.IsOnWall)
-                if (this.touchDirection.IsGrounded)
-                    return this.IsRunning ? this.runSpeed : this.walkSpeed;
-                else
-                    return this.airSpeed;
+            if (this.CanMove)
+                if (this.IsMoving && !this.touchDirection.IsOnWall)
+                    if (this.touchDirection.IsGrounded)
+                        return this.IsRunning ? this.runSpeed : this.walkSpeed;
+                    else
+                        return this.airSpeed;
 
             return 0;
         }
@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour {
                 gameObject.transform.localScale *= new Vector2(-1, 1);
 
             this._isFacingRight = value;
+        }
+    }
+
+    private Boolean CanMove {
+        get {
+            return this.animator.GetBool(AnimationStrings.canMove);
         }
     }
 
@@ -89,9 +95,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void OnJump(InputAction.CallbackContext ctx) {
-        if (ctx.started && this.touchDirection.IsGrounded) {
-            this.animator.SetTrigger(AnimationStrings.jump);
+        if (ctx.started && this.touchDirection.IsGrounded && this.CanMove) {
+            this.animator.SetTrigger(AnimationStrings.jumpTrigger);
             this.rigidBody2D.velocity = new Vector2(this.rigidBody2D.velocity.x, this.jumpImpulse);
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext ctx) {
+        if (ctx.started && this.touchDirection.IsGrounded) {
+            this.animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
 }
