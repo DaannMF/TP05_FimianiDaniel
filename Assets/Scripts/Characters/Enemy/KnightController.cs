@@ -13,6 +13,7 @@ public class KnightController : MonoBehaviour {
     Animator animator;
     private Rigidbody2D rigidBody2D;
     private TouchDirection touchDirection;
+    private Damageable damageable;
     private Vector2 walkableDirection = Vector2.right;
     private WalkDirection walkDirection;
     private WalkDirection WalkDirection {
@@ -49,6 +50,7 @@ public class KnightController : MonoBehaviour {
         this.rigidBody2D = GetComponent<Rigidbody2D>();
         this.touchDirection = GetComponent<TouchDirection>();
         this.animator = GetComponent<Animator>();
+        this.damageable = GetComponent<Damageable>();
     }
 
     private void Update() {
@@ -63,10 +65,11 @@ public class KnightController : MonoBehaviour {
         if (this.touchDirection.IsOnWall && this.touchDirection.IsGrounded)
             FlipDirection();
 
-        if (this.CanMove)
-            this.rigidBody2D.velocity = new Vector2(this.walkableDirection.x * this.walkSpeed, this.rigidBody2D.velocity.y);
-        else
-            this.rigidBody2D.velocity = new Vector2(Mathf.Lerp(this.rigidBody2D.velocity.x, 0, this.walkStopRate), this.rigidBody2D.velocity.y);
+        if (!this.damageable.LockVelocity)
+            if (this.CanMove)
+                this.rigidBody2D.velocity = new Vector2(this.walkableDirection.x * this.walkSpeed, this.rigidBody2D.velocity.y);
+            else
+                this.rigidBody2D.velocity = new Vector2(Mathf.Lerp(this.rigidBody2D.velocity.x, 0, this.walkStopRate), this.rigidBody2D.velocity.y);
     }
 
     private void FlipDirection() {
@@ -80,5 +83,9 @@ public class KnightController : MonoBehaviour {
 
     private void DetectTarget() {
         HasTarget = this.attackZone.HasTarget();
+    }
+
+    public void OnHit(Int16 damage, Vector2 knockBack) {
+        this.rigidBody2D.velocity = new Vector2(knockBack.x, knockBack.y + this.rigidBody2D.velocity.y);
     }
 }

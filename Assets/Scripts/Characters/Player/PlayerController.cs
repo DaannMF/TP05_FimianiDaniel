@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float airSpeed = 3f;
     [SerializeField] float jumpImpulse = 10f;
-    TouchDirection touchDirection;
+    private TouchDirection touchDirection;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
+    private Damageable damageable;
     private Vector2 moveInput;
     private Boolean _isMoving = false;
     private Boolean _isRunning = false;
@@ -73,10 +74,17 @@ public class PlayerController : MonoBehaviour {
         this.rigidBody2D = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
         this.touchDirection = GetComponent<TouchDirection>();
+        this.damageable = GetComponent<Damageable>();
     }
 
     private void FixedUpdate() {
-        this.rigidBody2D.velocity = new Vector2(this.moveInput.x * this.CurrentMoveSpeed, this.rigidBody2D.velocity.y);
+        Move();
+    }
+
+    private void Move() {
+        if (!this.damageable.LockVelocity)
+            this.rigidBody2D.velocity = new Vector2(this.moveInput.x * this.CurrentMoveSpeed, this.rigidBody2D.velocity.y);
+
         this.animator.SetFloat(AnimationStrings.yVelocity, this.rigidBody2D.velocity.y);
     }
 
@@ -116,5 +124,9 @@ public class PlayerController : MonoBehaviour {
         if (ctx.started && this.touchDirection.IsGrounded) {
             this.animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+    }
+
+    public void OnHit(Int16 damage, Vector2 knockBack) {
+        this.rigidBody2D.velocity = new Vector2(knockBack.x, knockBack.y + this.rigidBody2D.velocity.y);
     }
 }

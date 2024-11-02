@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8475518883699579323}
   - component: {fileID: 7891431728012737615}
   - component: {fileID: 2233916581730350502}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: SwordAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5692194956081035952}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.9, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -40,7 +40,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5692194956081035952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -77,13 +77,13 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 3.3428879, y: 0.91394114}
-      - {x: 2.525064, y: 1.420844}
-      - {x: 1.4825196, y: 0.74815845}
-      - {x: 2.0848656, y: 0.18972337}
-      - {x: 1.7726004, y: -0.5162562}
-      - {x: 3.40561, y: -1.0468851}
-      - {x: 3.7139885, y: -0.11182678}
+    - - {x: 0.46255708, y: 0.8830529}
+      - {x: -0.42476535, y: 1.4440101}
+      - {x: -1.3437567, y: 0.7558805}
+      - {x: -0.67458725, y: 0.066170394}
+      - {x: -1.1231744, y: -0.55486655}
+      - {x: 0.43261433, y: -1.0546072}
+      - {x: 0.833658, y: -0.14271498}
   m_UseDelaunayMesh: 0
 --- !u!114 &2233916581730350502
 MonoBehaviour:
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5adeffab57a34e7db77893f4fa33c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  knockBack: {x: 5, y: 2}
 --- !u!1 &8081413985403412325
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,6 +339,21 @@ MonoBehaviour:
   health: 100
   isInvincible: 0
   invincibilityDuration: 0.25
+  damageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3736350985561835732}
+        m_TargetAssemblyTypeName: KnightController, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &2269141330138138291
 Animator:
   serializedVersion: 5
