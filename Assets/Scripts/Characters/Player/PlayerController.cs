@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private Boolean IsAlive {
+        get {
+            return this.animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
+
     private void Awake() {
         this.rigidBody2D = GetComponent<Rigidbody2D>();
         this.animator = GetComponent<Animator>();
@@ -76,8 +82,13 @@ public class PlayerController : MonoBehaviour {
 
     public void OnMove(InputAction.CallbackContext ctx) {
         this.moveInput = ctx.ReadValue<Vector2>();
-        this.IsMoving = this.moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+        if (this.IsAlive) {
+            this.IsMoving = this.moveInput != Vector2.zero;
+            SetFacingDirection(moveInput);
+        }
+        else {
+            this.IsMoving = false;
+        }
     }
 
     private void SetFacingDirection(Vector2 moveInput) {

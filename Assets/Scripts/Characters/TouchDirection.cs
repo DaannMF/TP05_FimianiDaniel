@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 
 public class TouchDirection : MonoBehaviour {
+    [SerializeField] private ContactFilter2D castFilter;
     Animator animator;
-    private ContactFilter2D castFilter;
     private readonly float groundDistance = 0.05f;
     private readonly float wallDistance = 0.2f;
     private readonly float ceilingDistance = 0.05f;
