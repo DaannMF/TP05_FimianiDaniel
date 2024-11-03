@@ -126,6 +126,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void OnRangeAttack(InputAction.CallbackContext ctx) {
+        if (ctx.started && this.touchDirection.IsGrounded) {
+            this.animator.SetTrigger(AnimationStrings.rangeAttackTrigger);
+        }
+    }
+
     public void OnHit(Int16 damage, Vector2 knockBack) {
         this.rigidBody2D.velocity = new Vector2(knockBack.x, knockBack.y + this.rigidBody2D.velocity.y);
     }

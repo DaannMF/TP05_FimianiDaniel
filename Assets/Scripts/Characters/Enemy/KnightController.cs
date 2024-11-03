@@ -7,9 +7,11 @@ enum WalkDirection {
 }
 
 public class KnightController : MonoBehaviour {
-    [SerializeField] private float walkSpeed = 10f;
+    [SerializeField] private float walkAcceleration = 3f;
+    [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private float walkStopRate = 0.05f;
     [SerializeField] private DetectionZone attackZone;
+    [SerializeField] private DetectionZone cliffZone;
     Animator animator;
     private Rigidbody2D rigidBody2D;
     private TouchDirection touchDirection;
@@ -34,16 +36,25 @@ public class KnightController : MonoBehaviour {
     }
     private Boolean _hasTarget;
 
-    public bool HasTarget {
+    private bool HasTarget {
         get { return this._hasTarget; }
-        private set {
+        set {
             this._hasTarget = value;
             this.animator.SetBool(AnimationStrings.hasTarget, value);
         }
     }
 
-    public bool CanMove {
+    private bool CanMove {
         get { return this.animator.GetBool(AnimationStrings.canMove); }
+    }
+
+    private Single AttackCoolDown {
+        get {
+            return this.animator.GetFloat(AnimationStrings.attackCoolDown);
+        }
+        set {
+            this.animator.SetFloat(AnimationStrings.attackCoolDown, Mathf.Max(value, 0));
+        }
     }
 
     private void Awake() {
@@ -62,12 +73,17 @@ public class KnightController : MonoBehaviour {
     }
 
     private void Move() {
-        if (this.touchDirection.IsOnWall && this.touchDirection.IsGrounded)
+        if (this.touchDirection.IsOnWall && this.touchDirection.IsGrounded || !this.cliffZone.HasTarget())
             FlipDirection();
 
         if (!this.damageable.LockVelocity)
-            if (this.CanMove)
-                this.rigidBody2D.velocity = new Vector2(this.walkableDirection.x * this.walkSpeed, this.rigidBody2D.velocity.y);
+            if (this.CanMove) {
+                Single xVelocity = Mathf.Clamp(
+                    this.rigidBody2D.velocity.x + (this.walkableDirection.x * this.walkAcceleration * Time.fixedDeltaTime),
+                    -this.maxSpeed, this.maxSpeed
+                );
+                this.rigidBody2D.velocity = new Vector2(xVelocity, this.rigidBody2D.velocity.y);
+            }
             else
                 this.rigidBody2D.velocity = new Vector2(Mathf.Lerp(this.rigidBody2D.velocity.x, 0, this.walkStopRate), this.rigidBody2D.velocity.y);
     }
@@ -82,10 +98,16 @@ public class KnightController : MonoBehaviour {
     }
 
     private void DetectTarget() {
-        HasTarget = this.attackZone.HasTarget();
+        this.HasTarget = this.attackZone.HasTarget();
+        this.AttackCoolDown -= Time.deltaTime;
     }
 
     public void OnHit(Int16 damage, Vector2 knockBack) {
         this.rigidBody2D.velocity = new Vector2(knockBack.x, knockBack.y + this.rigidBody2D.velocity.y);
+    }
+
+    public void OnCliffDetected() {
+        if (this.touchDirection.IsGrounded)
+            FlipDirection();
     }
 }

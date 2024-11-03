@@ -68,10 +68,25 @@ public class Damageable : MonoBehaviour {
         if (this.IsAlive && !isInvincible) {
             this.Health -= damage;
             this.isInvincible = true;
+
+            // Invoke the damage event.
             this.animator.SetTrigger(AnimationStrings.hitTrigger);
             LockVelocity = true;
-            // Invoke the damage event.
             this.damageEvent.Invoke(damage, knockBack);
+            CharacterEvents.characterDamaged.Invoke(this.gameObject, damage);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public Boolean Heal(Int16 healAmount) {
+        if (this.IsAlive && this.Health < this.MaxHealth) {
+            Int16 maxHeal = (Int16)Math.Max(this.MaxHealth - this.Health, 0);
+            Int16 actualHealAmount = (Int16)Math.Min(maxHeal, healAmount);
+            this.Health += actualHealAmount;
+            CharacterEvents.characterHealed.Invoke(this.gameObject, actualHealAmount);
 
             return true;
         }
