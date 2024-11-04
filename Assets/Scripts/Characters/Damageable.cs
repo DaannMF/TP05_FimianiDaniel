@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour {
     [SerializeField] private Boolean isInvincible = false;
     [SerializeField] private Single invincibilityDuration = 0.25f;
     [SerializeField] private UnityEvent<Int16, Vector2> damageEvent;
+    [SerializeField] private FloatingHealthBar floatingHealthBar;
     [HideInInspector] public UnityEvent<Int16, Int16> healthEvent;
     Animator animator;
     private Boolean _isAlive = true;
@@ -48,6 +49,7 @@ public class Damageable : MonoBehaviour {
 
     private void Awake() {
         this.animator = GetComponent<Animator>();
+        this.floatingHealthBar = GetComponentInChildren<FloatingHealthBar>();
     }
 
     private void Update() {
@@ -69,6 +71,9 @@ public class Damageable : MonoBehaviour {
     public Boolean Hit(Int16 damage, Vector2 knockBack) {
         if (this.IsAlive && !isInvincible) {
             this.Health -= damage;
+            if (this.floatingHealthBar != null) {
+                this.floatingHealthBar.UpdateHealthBar(this.Health, this.MaxHealth);
+            }
             this.isInvincible = true;
 
             // Invoke the damage event.

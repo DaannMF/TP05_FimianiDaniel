@@ -18,11 +18,11 @@ Crear un juego de estilo Side Scroller 2D con jugabilidad similar a:
   - [✅] El personaje puede disparar.
   - [✅] El personaje debe poder saltar.
 - [✅] Hay objetos (Enemigos o Obstáculos) que le quitan vida al Jugador.
-  - [] Éstos se pueden eliminar disparándoles más de 2 veces. Tienen vida y se visualiza la barra de
+  - [✅] Éstos se pueden eliminar disparándoles más de 2 veces. Tienen vida y se visualiza la barra de
     vida arriba del enemigo.
-  - [] Utilizar ParticleSystem al destruirlo.
+  - [✅] Utilizar ParticleSystem al destruirlo.
 - [✅] Debe haber “Pickables”, ya sea coleccionable, vida o estamina, etc.
-- [] Integrar sonido (Feedback sonoro) en todas las acciones del juego:
+- [✅] Integrar sonido (Feedback sonoro) en todas las acciones del juego:
   - [✅] Música de Gameplay.
   - [✅] Saltar.
   - [✅] Disparar.

@@ -10,7 +10,6 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private Canvas gameCanvas;
 
     private void Awake() {
-        this.gameCanvas = FindObjectOfType<Canvas>();
         CharacterEvents.characterDamaged += CharacterTookDamage;
         CharacterEvents.characterHealed += CharacterHealed;
     }
