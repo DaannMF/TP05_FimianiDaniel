@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void OnAttack(InputAction.CallbackContext ctx) {
-        if (ctx.started && this.touchDirection.IsGrounded) {
+        if (ctx.started) {
             this.animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }

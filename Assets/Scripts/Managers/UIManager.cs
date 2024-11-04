@@ -1,6 +1,8 @@
 using System;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject damageTextPrefab;
@@ -34,5 +36,20 @@ public class UIManager : MonoBehaviour {
         TMP_Text tMP_Text = Instantiate(this.healthTextPrefab, spawnPosition, Quaternion.identity, this.gameCanvas.transform)
             .GetComponent<TMP_Text>();
         tMP_Text.text = heal.ToString();
+    }
+
+    public void OnExitGame(InputAction.CallbackContext context) {
+        if (context.started) {
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            Debug.Log("Exiting game");
+#endif
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+            Application.Quit();
+#endif
+        }
     }
 }

@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour {
     [SerializeField] private Boolean isInvincible = false;
     [SerializeField] private Single invincibilityDuration = 0.25f;
     [SerializeField] private UnityEvent<Int16, Vector2> damageEvent;
+    [HideInInspector] public UnityEvent<Int16, Int16> healthEvent;
     Animator animator;
     private Boolean _isAlive = true;
     private Single timeSinceLastHit = 0;
@@ -21,6 +22,7 @@ public class Damageable : MonoBehaviour {
         get { return this.health; }
         set {
             this.health = value;
+            this.healthEvent?.Invoke(this.health, this.maxHealth);
             if (this.health <= 0) {
                 this.IsAlive = false;
             }
