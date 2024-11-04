@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4839992606591758205}
   - component: {fileID: 7983971762095739714}
   m_Layer: 0
-  m_Name: ForestPaller
+  m_Name: ForestPallet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -77,7 +77,7 @@ public class KnightController : MonoBehaviour {
             FlipDirection();
 
         if (!this.damageable.LockVelocity)
-            if (this.CanMove) {
+            if (this.CanMove && this.touchDirection.IsGrounded) {
                 Single xVelocity = Mathf.Clamp(
                     this.rigidBody2D.velocity.x + (this.walkableDirection.x * this.walkAcceleration * Time.fixedDeltaTime),
                     -this.maxSpeed, this.maxSpeed
