@@ -477,7 +477,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e63b71820b3b9476d994e9c1c1eb7e92, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -495,7 +494,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 11ca25030f8324c83813aa2f70015c0c, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -558,7 +556,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 39085b8850f0444468d427b1f6aa2464, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0

@@ -38,7 +38,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc8703beef20d4acc8d5c1593f9bda71, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -56,7 +55,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc8703beef20d4acc8d5c1593f9bda71, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -74,7 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 1b4a6fa6cc07f439397c9e72f2a61c05, type: 3}
-  volume: 1
   playOnEnter: 0
   playOnExit: 0
   playAfterDelay: 1
@@ -111,9 +108,6 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 9188156566917810338}
     m_Position: {x: 110, y: 200, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -7834254800499111401}
-    m_Position: {x: 145, y: 265, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 5643672020390472155}
@@ -132,9 +126,6 @@ AnimatorStateMachine:
   - {fileID: 5870964296687207606}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 3598567993584340668}
-    second:
-    - {fileID: 6446970586349860895}
   - first: {fileID: 5643672020390472155}
     second:
     - {fileID: 8107462100578482405}
@@ -148,6 +139,9 @@ AnimatorStateMachine:
   - first: {fileID: -269001953057840998}
     second:
     - {fileID: -8471101355094758017}
+  - first: {fileID: 3598567993584340668}
+    second:
+    - {fileID: 6446970586349860895}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 630, y: 120, z: 0}
   m_EntryPosition: {x: 120, y: 110, z: 0}
@@ -181,32 +175,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: -918283999139726767}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-7834254800499111401
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: player_kick
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 04f863c97bb4a4d21982cdb7b895efa2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -672,7 +640,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc8703beef20d4acc8d5c1593f9bda71, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -821,7 +788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc8703beef20d4acc8d5c1593f9bda71, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -896,7 +862,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: e63b71820b3b9476d994e9c1c1eb7e92, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -1040,85 +1005,85 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isRunning
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isGrounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isOnWall
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isOnCeiling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: yVelocity
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: jump
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: canMove
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isAlive
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: lockVelocity
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: hit
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: rangeAttack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1353,7 +1318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: cc8703beef20d4acc8d5c1593f9bda71, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0
@@ -1965,7 +1929,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 11ca25030f8324c83813aa2f70015c0c, type: 3}
-  volume: 1
   playOnEnter: 1
   playOnExit: 0
   playAfterDelay: 0

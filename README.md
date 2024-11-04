@@ -29,7 +29,7 @@ Crear un juego de estilo Side Scroller 2D con jugabilidad similar a:
   - [✅] Agarrar Coleccionable.
   - [✅] Eliminar enemigo.
   - [✅] Al perder.
-  - [] Otras a elección.
+  - [✅] Otras a elección.
 - [] El volumen del sonido debe ser configurable desde “Settings” directo a un AudioMixer.
 - [] Se deben utilizar “ScriptableObject” para guardar datos o configuraciones.
 - [✅] Hay power ups o sutil modificación de jugabilidad dado determinado caso.
