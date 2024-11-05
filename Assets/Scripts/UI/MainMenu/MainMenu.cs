@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneLoader : MonoBehaviour {
+public class MainMenu : MonoBehaviour {
 
     [Header("Buttons")]
     [SerializeField] private Button playButton;
@@ -12,6 +12,7 @@ public class SceneLoader : MonoBehaviour {
     [SerializeField] private Button exitButton;
 
     [Header("Panels")]
+    [SerializeField] private GameObject panelMainMenu;
     [SerializeField] private GameObject controlsPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject creditsPanel;
@@ -33,7 +34,12 @@ public class SceneLoader : MonoBehaviour {
     }
 
     private void OnPlayButtonClicked() {
-        SceneManager.LoadScene("GamePlayScene");
+        if (SceneManager.GetActiveScene().name != "GamePlayScene")
+            SceneManager.LoadScene("GamePlayScene");
+        else
+            this.panelMainMenu.SetActive(false);
+
+        Time.timeScale = 1;
     }
 
     private void OnControlsButtonClicked() {

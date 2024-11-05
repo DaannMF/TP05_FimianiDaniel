@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private GameObject damageTextPrefab;
     [SerializeField] private GameObject healthTextPrefab;
     [SerializeField] private Canvas gameCanvas;
+    [SerializeField] private GameObject pauseMenu;
 
     private void Awake() {
         CharacterEvents.characterDamaged += CharacterTookDamage;
@@ -38,17 +39,9 @@ public class UIManager : MonoBehaviour {
     }
 
     public void OnExitGame(InputAction.CallbackContext context) {
+        Time.timeScale = 0;
         if (context.started) {
-
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
-            Debug.Log("Exiting game");
-#endif
-
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-            Application.Quit();
-#endif
+            this.pauseMenu.SetActive(true);
         }
     }
 }
