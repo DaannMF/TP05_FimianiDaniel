@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
-    [SerializeField] float walkSpeed = 5f;
-    [SerializeField] float runSpeed = 8f;
-    [SerializeField] float airSpeed = 3f;
-    [SerializeField] float jumpImpulse = 10f;
+    [SerializeField] private PlayerStats playerStats;
+
     private TouchDirection touchDirection;
     private Rigidbody2D rigidBody2D;
     private Animator animator;
@@ -38,9 +36,9 @@ public class PlayerController : MonoBehaviour {
             if (this.CanMove)
                 if (this.IsMoving && !this.touchDirection.IsOnWall)
                     if (this.touchDirection.IsGrounded)
-                        return this.IsRunning ? this.runSpeed : this.walkSpeed;
+                        return this.IsRunning ? this.playerStats.runSpeed : this.playerStats.walkSpeed;
                     else
-                        return this.airSpeed;
+                        return this.playerStats.airSpeed;
 
             return 0;
         }
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour {
     public void OnJump(InputAction.CallbackContext ctx) {
         if (ctx.started && this.touchDirection.IsGrounded && this.CanMove) {
             this.animator.SetTrigger(AnimationStrings.jumpTrigger);
-            this.rigidBody2D.velocity = new Vector2(this.rigidBody2D.velocity.x, this.jumpImpulse);
+            this.rigidBody2D.velocity = new Vector2(this.rigidBody2D.velocity.x, this.playerStats.jumpImpulse);
         }
     }
 

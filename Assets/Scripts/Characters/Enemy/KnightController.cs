@@ -7,9 +7,7 @@ enum WalkDirection {
 }
 
 public class KnightController : MonoBehaviour {
-    [SerializeField] private float walkAcceleration = 3f;
-    [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private float walkStopRate = 0.05f;
+    [SerializeField] private KnightEnemyStats knightEnemyStats;
     [SerializeField] private DetectionZone attackZone;
     [SerializeField] private DetectionZone cliffZone;
     Animator animator;
@@ -79,13 +77,13 @@ public class KnightController : MonoBehaviour {
         if (!this.damageable.LockVelocity)
             if (this.CanMove && this.touchDirection.IsGrounded) {
                 Single xVelocity = Mathf.Clamp(
-                    this.rigidBody2D.velocity.x + (this.walkableDirection.x * this.walkAcceleration * Time.fixedDeltaTime),
-                    -this.maxSpeed, this.maxSpeed
+                    this.rigidBody2D.velocity.x + (this.walkableDirection.x * this.knightEnemyStats.walkAcceleration * Time.fixedDeltaTime),
+                    -this.knightEnemyStats.maxSpeed, this.knightEnemyStats.maxSpeed
                 );
                 this.rigidBody2D.velocity = new Vector2(xVelocity, this.rigidBody2D.velocity.y);
             }
             else
-                this.rigidBody2D.velocity = new Vector2(Mathf.Lerp(this.rigidBody2D.velocity.x, 0, this.walkStopRate), this.rigidBody2D.velocity.y);
+                this.rigidBody2D.velocity = new Vector2(Mathf.Lerp(this.rigidBody2D.velocity.x, 0, this.knightEnemyStats.walkStopRate), this.rigidBody2D.velocity.y);
     }
 
     private void FlipDirection() {
