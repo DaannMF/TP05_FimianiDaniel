@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FloatingHealthBar : MonoBehaviour {
+[RequireComponent(typeof(Slider))]
+public class EnemyFloatingHealthBar : MonoBehaviour {
     [SerializeField] private Vector3 offset;
     private Slider slider;
 
